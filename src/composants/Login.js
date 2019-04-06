@@ -19,16 +19,22 @@ class Login extends React.Component{
         this.setState({password: evt.target.value})
     
     }
-    
+    pressEnter = (e)=>{
+        if(e.key==='Enter'){
+            this.handleClick()
+        }
+    }
    handleClick(){
     axios.get('http://localhost:8080/twister/login?login='+this.state.login+'&password='+this.state.password)
     .then(response=>{
         if(!response.data.clé){
             this.setState({status: "error",texterror: response.data.message})
+            
         }else{
             this.setState({key: response.data.clé})
             this.props.connexion()
-            this.props.cle()
+            this.props.setKey(this.state.key)
+
         }
         
     })
@@ -37,6 +43,7 @@ class Login extends React.Component{
     render(){
        
         return (
+    
             <header>
             <div className="container">
             <div className="row">
@@ -48,7 +55,8 @@ class Login extends React.Component{
                         <div className="col-sm-5">
                               <div className="form-group">
                                 <input type="text" value={this.state.login} 
-                                className="form-control" onChange={this.updateLoginValue} 
+                                className="form-control" tabIndex="1"
+                                onKeyPress={this.pressEnter.bind(this)} onChange={this.updateLoginValue} 
                                 placeholder="Email Address"/>
                                 <div className="login-bottom-text checkbox hidden-sm">
                                     <label>
@@ -61,6 +69,8 @@ class Login extends React.Component{
                         <div className="col-sm-5">
                              <div className="form-group">
                                 <input type="password" 
+                                tabIndex="2"
+                                onKeyPress={this.pressEnter.bind(this)}
                                 className="form-control"
                                  placeholder="Password"
                                  value={this.state.password}
@@ -71,7 +81,8 @@ class Login extends React.Component{
                         </div>
                         <div className="col-sm-2">
                              <div className="form-group">
-                                <button type="button"  onClick={this.handleClick.bind(this)}>
+                                <button type="button"
+                                onClick={this.handleClick.bind(this)}>
                                 connexion </button>
                               </div>
                         </div>
@@ -81,7 +92,8 @@ class Login extends React.Component{
             </div>
         </header>
         )
-        
     }
+        
+    
 }
 export default Login
