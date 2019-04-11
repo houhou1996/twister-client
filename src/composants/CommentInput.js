@@ -8,19 +8,19 @@ class CommentInput extends React.Component{
         this.state={content:""}
     }
 
-    updateTextValue(evt){
+    updateTextValue = (evt) =>{
         this.setState({content: evt.target.value})
         
     }
-handleClick(){
+handleClick =() =>{
+
     this.props.addComment(this.props.cle,this.props.post._id,this.state.content,this.props.indice)
 
 }
     render(){
         return(
             <div>
-                <input onChange={this.updateTextValue.bind(this)} className="form-control" placeholder="Add a comment" type="text" />
-                <button onClick={this.handleClick.bind(this)}>add comment</button>
+                
             </div>
         )
     }
@@ -30,7 +30,7 @@ handleClick(){
 }
 const mapStateToProps = (state) => {
     return{
-        cle: state.currentUser
+        cle: state.currentUser.cle
     }
 }
 const mapDispatchToProps={

@@ -6,7 +6,7 @@ class Signin extends React.Component {
     constructor() {
       super();
       this.state = {
-        fields: {},
+        fields: {username:"",emailid:"",mobileno:"",password:""},
         errors: {}
       }
 

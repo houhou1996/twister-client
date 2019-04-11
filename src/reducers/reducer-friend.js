@@ -14,6 +14,8 @@ export default function (state = [],action){
             return [
                 ...state,action.payload
             ]
+        case AT_FRIENDS.DELETE:
+            return state.filter(friend=>friend.idUser!==action.idUser && friend.idFriend!==action.idFriend)
       
             
     

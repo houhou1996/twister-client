@@ -14,17 +14,7 @@ class CommentList extends React.Component{
     render(){
         return(
             <div>
-                {
-                    this.props.post.comments.map(comment=>{
-                        return(
-                            <p key = {comment._id}>
-                                    <Comment comment={comment}>
-
-                                    </Comment>
-                            </p>
-                        )
-                    })
-                }
+                
             </div>
         )
     }

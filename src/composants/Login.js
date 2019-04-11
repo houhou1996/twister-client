@@ -3,10 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/Login.css'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {connection} from '../actions/index'
-import {afficheFriends} from '../actions/index'
-import {listPosts} from '../actions/index'
-import {getUsers} from '../actions/index'
+import {connection,getUsers,afficheFriends,listPosts} from '../actions/index'
+
 class Login extends React.Component{
 
     constructor(props){
@@ -41,8 +39,6 @@ class Login extends React.Component{
             this.setState({key: response.data.clé})
             this.setState({idUser: response.data.idUser})
             this.props.connexion()
-            this.props.setKey(this.state.key)
-            this.props.setIdUser(this.state.idUser)
             this.props.getUsers()
             this.props.connection(this.state.key,this.state.idUser)
             this.props.afficheFriends(this.state.key)
@@ -121,7 +117,7 @@ const mapDispatchToProps  = {
     getUsers,
     afficheFriends,
     connection,
-    listPosts,
+    listPosts
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Login)

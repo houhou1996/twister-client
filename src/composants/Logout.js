@@ -7,16 +7,14 @@ import {disconnect} from '../actions/index'
 class Logout extends React.Component{
     constructor(props){
         super(props)
-        this.state={key:"",status:"",texterror:""}
+        this.state={status:"",texterror:""}
     }
     logout(){
 
             axios.get('http://localhost:8080/twister/logout?key='+this.props.cle)
             .then(response=>{
                 if(!response.data.code){
-                    this.setState({key: ""})
                     this.props.logout()
-                    this.props.setKey(this.state.key)
                     this.props.disconnect()
                     
 
@@ -36,4 +34,9 @@ class Logout extends React.Component{
 const mapDispatchToProps ={
     disconnect
 }
-export default connect(null,mapDispatchToProps)(Logout)
+ const mapStateToProps = (state) => {
+    return {
+        cle: state.currentUser.cle
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Logout)

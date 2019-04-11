@@ -13,13 +13,11 @@ import {switchProfilePost} from '../actions/index'
 class MainPage extends React.Component{
         constructor(props){
             super(props)
-            this.state = {isConnected : false, pageCourante: "login",isInHomePage :true,key:"",idUser:0}
+            this.state = {isConnected : false, pageCourante: "login",isInHomePage :true}
             this.getConnected = this.getConnected.bind(this)
             this.setLogout = this.setLogout.bind(this)
             this.setHomePage = this.setHomePage.bind(this)
             this.setProfile = this.setProfile.bind(this)
-            this.setKey = this.setKey.bind(this)
-            this.setIdUser = this.setIdUser.bind(this)
             this.setProfile2 = this.setProfile2.bind(this)
         }
     
@@ -43,12 +41,7 @@ setProfile2(){
     this.props.switchProfile(this.props.currectUserId)
     this.setState(()=>({isInHomePage: false}))
 }
-setKey(cle){
-    this.setState({key: cle})
-}
-setIdUser(id){
-    this.setState({idUser: id})
-}
+
 render(){
     if(this.state.isConnected === true){
         if(this.state.isInHomePage===true){
@@ -68,7 +61,7 @@ render(){
                             </div>
                         <div className="col-1">
 
-                            <Logout logout={this.setLogout} cle={this.state.key} setKey={this.setKey}/>
+                            <Logout logout={this.setLogout}/>
                         </div>
                             
                             
@@ -78,7 +71,7 @@ render(){
                 </div>
                 </nav>
                 <div>
-                <HomePage setIdUser={this.setIdUser} setProfile={this.setProfile} cle={this.state.key}></HomePage>
+                <HomePage  setProfile={this.setProfile}></HomePage>
 
             </div>
             </div>
@@ -100,7 +93,7 @@ render(){
                             </div>
                         <div className="col-1">
 
-                            <Logout setKey={this.setKey} logout ={this.setLogout} cle={this.state.key}/>
+                            <Logout logout ={this.setLogout}/>
                         </div> 
                     </div>                       
                 </div>
@@ -129,7 +122,8 @@ render(){
 const mapStateToProps = (state) => {
     return {
         currectUserId: state.currentUser.idUser,
-        idUser: state.currentProfile.idUser
+        idUser: state.currentProfile.idUser,
+        cle: state.currentUser.cle
     }
 }
 

@@ -8,13 +8,24 @@ export const SWITCH_PROFILE_POST = "SWITCH_PROFILE_POST"
 export const LIST_USERS = "LIST_USERS"
 
 
+export function deleteFriend(cle,idUser,idFriend){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/removeFriend?key="+cle+"&idFriend="+idFriend
+        axios.get(url).then(response=>{
 
+                    dispatch({type : AT_FRIENDS.DELETE, idUser:idUser,idFriend : idFriend})
+                        
+                })
+        
+    }     
+    
+}
 
 export function addFriend(cle,id){
     return function(dispatch){
         var url = "http://localhost:8080/twister/addFriend?key="+cle+"&idFriend="+id
         axios.get(url).then(response=>{
-                console.log(response.data)
+     
                     dispatch({type : AT_FRIENDS.ADD,  payload : response.data})
                         
                 })
@@ -77,12 +88,10 @@ export function connection(cle,idUser){
     }
 }
 export function afficheFriends(cle){
-    console.log("je suis dans affiche Friend frero==>",cle)
     return function(dispatch){
         var url = "http://localhost:8080/twister/ListFriends?key="+cle
         axios.get(url)
                 .then(response=>{
-                    console.log(response.data)
                         dispatch({type : FRIEND_DISPLAYED,  payload : response.data.friends})
                 })
     }  

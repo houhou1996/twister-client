@@ -15,6 +15,7 @@ class PostInput extends React.Component{
 
 handleClick(cle,content){
     this.props.addPost(cle,content)
+    this.setState({content: ""})
 }
     render(){
         return(
@@ -24,6 +25,7 @@ handleClick(cle,content){
               <div className="col-xs-12" id="post_content">
               
                         <textarea className="col-xs-11" 
+                        value={this.state.content}
                         onChange={this.updateTextValue.bind(this)}
                         placeholder="What's on your mind?"/>
             </div>

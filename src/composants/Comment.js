@@ -11,11 +11,7 @@ class Comment extends React.Component{
     render(){
             return(
                 <div>
-                    <p>
-                        {
-                            this.props.comment.text
-                        }
-                    </p>
+                    
                 </div>
             )
     }

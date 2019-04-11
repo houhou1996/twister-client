@@ -1,16 +1,15 @@
 import React from 'react'
-import PostInput from './PostInput'
 import PostList from './PostList'
-import FriendList from './FriendList'
 import '../style/profile.css'
 import UserDetails from './UserDetails'
 import {connect} from 'react-redux'
 import {addFriend} from '../actions/index'
+import {deleteFriend} from '../actions/index'
 
 class ProfilePage extends React.Component{
-    constructor(props){
-        super(props)
-
+    
+    deleteClick(){
+      this.props.deleteFriend(this.props.cle,this.props.currentUser,this.props.currentProfile)
     }
     handleClick(){
         this.props.addFriend(this.props.cle,this.props.currentProfile)
@@ -18,10 +17,13 @@ class ProfilePage extends React.Component{
     areFriends = (idUser,idFriend) =>{
           let trouve = false;
           this.props.friends.map(friend=>{
+          
                 if(idUser === friend.idUser && idFriend === friend.idFriend){
                   trouve = true;
                 }
+              
           })
+          
         return trouve
     }
 
@@ -40,8 +42,7 @@ class ProfilePage extends React.Component{
                                       <img className="editable img-responsive" alt=" Avatar" id="avatar2" src="http://bootdey.com/img/Content/avatar/avatar6.png" />
                                     </span>
                                     <div className="space space-4" />
-                                  
-                                    
+                              
                                   </div>{/* /.col */}
 
 
@@ -83,7 +84,7 @@ class ProfilePage extends React.Component{
                            <div className="space space-4" />
                            <a href="#" className="btn btn-sm btn-block btn-success">
                              <i className="ace-icon fa fa-plus-circle bigger-120" />
-                             <span onClick={this.handleClick.bind(this)}
+                             <span onClick={this.deleteClick.bind(this)}
                              className="bigger-110">delete friend</span>
                            </a>
                           
@@ -117,7 +118,6 @@ class ProfilePage extends React.Component{
       return(
         <div id="user-profile-2" className="user-profile">
                <div className="tabbable">
-                 
                  <div className="tab-content no-border padding-24">
                    <div id="home" className="tab-pane in active">
                      <div className="row">
@@ -163,7 +163,8 @@ class ProfilePage extends React.Component{
   }
 }
 const mapDispatchToProps = {
-  addFriend
+  addFriend,
+  deleteFriend
 }
  const mapStateToProps = (state) => {
    return {

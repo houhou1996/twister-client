@@ -10,16 +10,18 @@ class PostList extends React.Component{
             <div>
                 {
                     this.props.myPosts.map((post,index)=>{
+                    if(post !== undefined){
                         return(
-                            <p key = {post._id}>
+                            <div key = {post._id}>
                                 {
                                    <Post setIdUser={this.props.setIdUser} 
                                    setProfile={this.props.setProfile} 
                                    indice = {index}cle={this.props.cle} 
                                    post={post}></Post>
                                 }
-                            </p>
+                            </div>
                         )
+                            }
                     })
                 }
             </div>

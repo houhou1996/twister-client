@@ -5,9 +5,6 @@ import {switchProfilePost} from '../actions/index'
 
  class Friend extends React.Component{
 
-        constructor(props){
-            super(props)
-        }
     handleClick(id){
         console.log(id)
         this.props.switchProfile(id)
@@ -20,7 +17,7 @@ import {switchProfilePost} from '../actions/index'
             <hr />
             <div className="container bootstrap snippet">
               <div className="row">
-                <div className="col-lg-12">
+                <div className="col">
                   <div className="main-box no-header clearfix">
                     <div className="main-box-body clearfix">
                       <div className="table-responsive">
@@ -29,7 +26,6 @@ import {switchProfilePost} from '../actions/index'
                             <tr>
                               <th><span>Friend</span></th>
                               <th><span>Created</span></th>
-                              <th className="text-center"><span>Status</span></th>
                               <th><span>Email</span></th>
                               <th>&nbsp;</th>
                             </tr>
@@ -37,14 +33,12 @@ import {switchProfilePost} from '../actions/index'
                           <tbody>
                             <tr>
                               <td>
-                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt />
+                                <img src="https://bootdey.com/img/Content/user_1.jpg"  />
                                 <a onClick={()=>this.handleClick(this.props.friend.idFriend)}
                                 href="#" className="user-link">{this.props.friend.name}</a>
                               </td>
                               <td>{this.props.friend.date}</td>
-                              <td className="text-center">
-                                <span className="label label-default">Inactif</span>
-                              </td>
+                             
                               <td>
                                 <a href="#">{this.props.friend.login}</a>
                               </td>

@@ -4,23 +4,22 @@ import PostInput from './PostInput'
 import PostList from './PostList'
 import FriendList from './FriendList';
 class HomePage extends React.Component{
-    constructor(props){
-        super(props)
-    }
-
+ 
     
     
     
     render(){
             return(
             <div className ="container">
+            <PostInput cle={this.props.cle}></PostInput>
                 <div className="row">
-                    <div className="col">
-                        <PostInput cle={this.props.cle}></PostInput>
+                
+                    <div className="col-md-7">
+                       
                         <PostList setIdUser={this.props.setIdUser} setProfile={this.props.setProfile}  cle ={this.props.cle}></PostList>
                         
                     </div>
-                    <div className="col">
+                    <div className="col-md-5">
                         <FriendList setProfile ={this.props.setProfile}cle ={this.props.cle}></FriendList>
                     </div>
                 </div>

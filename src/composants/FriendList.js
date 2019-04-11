@@ -8,9 +8,11 @@ class FriendList extends React.Component{
  
     render (){
         return(
-            this.props.friends.map(friend=>{
+            this.props.friends.map((friend,index)=>{
                     return(
-                        <Friend setProfile={this.props.setProfile} friend ={friend}/>
+                        <div key = {index}>
+                            <Friend setProfile={this.props.setProfile} friend ={friend}/>
+                        </div>  
                     )
             })
     

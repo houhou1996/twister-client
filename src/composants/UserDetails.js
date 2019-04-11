@@ -13,7 +13,7 @@ render(){
                 this.props.users.map((user)=>{
                     if(user.id === this.props.idUser){
                         return(
-                            <div className="col-xs-12 col-sm-9">
+                            <div key ={user.id} className="col-xs-12 col-sm-9">
                                     <h4 className="blue">
                                       <span className="middle">{user.name}</span>
                                       
