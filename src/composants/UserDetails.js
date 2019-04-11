@@ -5,9 +5,7 @@ class UserDetails extends React.Component{
     constructor(props){
         super(props)
     }
-componentDidMount(){
-    console.log("id=====>",this.props.idUser)
-}
+
 render(){
     return(
         <div>
@@ -17,11 +15,8 @@ render(){
                         return(
                             <div className="col-xs-12 col-sm-9">
                                     <h4 className="blue">
-                                      <span className="middle">John Doe</span>
-                                      <span className="label label-purple arrowed-in-right">
-                                        <i className="ace-icon fa fa-circle smaller-80 align-middle" />
-                                        online
-                                      </span>
+                                      <span className="middle">{user.name}</span>
+                                      
                                     </h4>
                                     <div className="profile-user-info">
                                       <div className="profile-info-row">

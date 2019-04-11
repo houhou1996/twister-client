@@ -19,8 +19,8 @@ handleClick(){
     render(){
         return(
             <div>
-            <input onChange={this.updateTextValue.bind(this)} className="form-control" placeholder="Add a comment" type="text" />
-            <button onClick={this.handleClick.bind(this)}>add comment</button>
+                <input onChange={this.updateTextValue.bind(this)} className="form-control" placeholder="Add a comment" type="text" />
+                <button onClick={this.handleClick.bind(this)}>add comment</button>
             </div>
         )
     }

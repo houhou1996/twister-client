@@ -1,45 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {afficheFriends} from '../actions/index'
+import '../style/friendList.css'
+import Friend from './Friend';
 class FriendList extends React.Component{
-
-componentWillMount(){
-    
-    this.props.afficheFriends(this.props.cle)
-}
  
     render (){
-        if(this.props.friends!== undefined){
         return(
-           <div>
-              {
-                  this.props.friends.map((friend,index)=>{
-                      return(
-                    <p key ={index}> 
-                      {
-                            friend.name
-                      }
-                      </p>
-                      );
-                  })
-              }
-           </div>
-        )
-    }else{
-        return(
-            <div>
-
-            </div>
+            this.props.friends.map(friend=>{
+                    return(
+                        <Friend setProfile={this.props.setProfile} friend ={friend}/>
+                    )
+            })
+    
         )
     }
-}
-
     
 }
 
 const  mapStateToProps = (state) =>{    
     return {
-        friends: state.friends.friends
+        friends: state.friends
     }
 }
 const mapDispatchToProps ={

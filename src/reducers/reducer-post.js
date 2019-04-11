@@ -2,10 +2,13 @@ import {AT_POSTS, AT_COMMENTS} from '../actions/action-types'
 import * as schema from '../composants/schema'
 import {normalize} from 'normalizr'
 import merge from 'lodash.merge'
+import{SWITCH_PROFILE_POST} from '../actions/index'
 
 export default function (state = [],action){
     var store = [...state]
     switch(action.type){
+        case SWITCH_PROFILE_POST:
+                return action.payload.filter(post=>post.id_user===action.idUser)
         case AT_POSTS.ADD:
             return [
                 ...state,action.payload

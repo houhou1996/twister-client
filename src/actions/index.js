@@ -1,12 +1,47 @@
 import axios from 'axios'
-import {AT_POSTS, AT_COMMENTS} from './action-types'
+import {AT_POSTS, AT_COMMENTS,AT_FRIENDS} from './action-types'
 export const FRIEND_DISPLAYED = "FRIEND_DISPLAYED"
 export const LOG_OUT = "LOG_OUT"
 export const SWITCH_USER = "SWITCH_USER"
+export const SWITCH_PROFILE = "SWITCH_PROFILE"
+export const SWITCH_PROFILE_POST = "SWITCH_PROFILE_POST"
 export const LIST_USERS = "LIST_USERS"
 
 
 
+
+export function addFriend(cle,id){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/addFriend?key="+cle+"&idFriend="+id
+        axios.get(url).then(response=>{
+                console.log(response.data)
+                    dispatch({type : AT_FRIENDS.ADD,  payload : response.data})
+                        
+                })
+        
+    }     
+    
+}
+
+
+export function switchProfilePost(id){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/listPosts?maxvalue=100"
+        axios.get(url)
+                .then(response=>{
+                        dispatch({type : SWITCH_PROFILE_POST,idUser:id,  payload : response.data.posts})
+                })
+
+}   
+    
+}
+export function switchProfile(id){
+    return function(dispatch){
+      dispatch({type : SWITCH_PROFILE, payload : {"idUser": id}})
+   
+    }    
+    
+}
 export function addComment(cle,id,content,index){
     return function(dispatch){
         var url = "http://localhost:8080/twister/addComment?key="+cle+"&idPost="+id+"&text="+content
@@ -20,8 +55,10 @@ export function addComment(cle,id,content,index){
     
 }
 export function getUsers(){
+
     return function(dispatch){
         axios.get("http://localhost:8080/twister/ListUsers").then(response=>{
+    
                     dispatch({type : LIST_USERS, payload : response.data})
                         
                 })
@@ -40,11 +77,13 @@ export function connection(cle,idUser){
     }
 }
 export function afficheFriends(cle){
+    console.log("je suis dans affiche Friend frero==>",cle)
     return function(dispatch){
         var url = "http://localhost:8080/twister/ListFriends?key="+cle
         axios.get(url)
                 .then(response=>{
-                        dispatch({type : FRIEND_DISPLAYED,  payload : response.data})
+                    console.log(response.data)
+                        dispatch({type : FRIEND_DISPLAYED,  payload : response.data.friends})
                 })
     }  
 }
@@ -88,7 +127,6 @@ export function deletePost(cle,id){
         var url = "http://localhost:8080/twister/RemovePost?key="+cle+"&idPost="+id
         axios.get(url)
                 .then(response=>{
-                    console.log(response.data)
                         dispatch({type : AT_POSTS.DELETE,  payload : id})
                 })
     }

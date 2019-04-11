@@ -14,7 +14,6 @@ class Logout extends React.Component{
             axios.get('http://localhost:8080/twister/logout?key='+this.props.cle)
             .then(response=>{
                 if(!response.data.code){
-                    console.log(response.data)
                     this.setState({key: ""})
                     this.props.logout()
                     this.props.setKey(this.state.key)

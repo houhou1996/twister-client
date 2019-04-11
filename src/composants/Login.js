@@ -43,10 +43,11 @@ class Login extends React.Component{
             this.props.connexion()
             this.props.setKey(this.state.key)
             this.props.setIdUser(this.state.idUser)
+            this.props.getUsers()
             this.props.connection(this.state.key,this.state.idUser)
             this.props.afficheFriends(this.state.key)
             this.props.listPosts("")
-            this.props.getUsers()
+            
 
         }
         

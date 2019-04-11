@@ -5,6 +5,8 @@ import CommentList from './CommentList'
 import CommentInput from './CommentInput';
 import {connect} from 'react-redux'
 import {deletePost} from '../actions/index'
+import {switchProfile} from '../actions/index'
+import {switchProfilePost} from '../actions/index'
 import ProfilePage from './ProfilePage';
 class Post extends React.Component{
 
@@ -15,18 +17,16 @@ constructor(props){
 }
 
 
-componentDidMount(){
-  console.log(this.props.post.name)
-}
+
 
 supprimer(id){
       this.props.deletePost(this.props.userKey,id)
       
 }
 handleClick(id){
-  console.log(id)
-  this.props.setIdUser(id)
-  this.props.setProfile()
+    this.props.switchProfile(id)
+    this.props.switchProfilePost(id)
+    this.props.setProfile(id)
 
 
 }
@@ -99,7 +99,9 @@ const mapStateToProps = (state) => {
   }
 }
 const mapDispatchToProps = {
-      deletePost
+      deletePost,
+      switchProfile,
+      switchProfilePost
   
 }
 

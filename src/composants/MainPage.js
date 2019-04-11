@@ -8,6 +8,8 @@ import ProfilePage from './ProfilePage';
 import '../style/navigation.css'
 import {connect} from 'react-redux'
 import {listPosts} from '../actions/index'
+import {switchProfile} from '../actions/index'
+import {switchProfilePost} from '../actions/index'
 class MainPage extends React.Component{
         constructor(props){
             super(props)
@@ -18,7 +20,7 @@ class MainPage extends React.Component{
             this.setProfile = this.setProfile.bind(this)
             this.setKey = this.setKey.bind(this)
             this.setIdUser = this.setIdUser.bind(this)
-            this.setProfileClick = this.setProfileClick.bind(this)
+            this.setProfile2 = this.setProfile2.bind(this)
         }
     
 
@@ -30,16 +32,15 @@ setLogout(){
 }
 setHomePage(){
     this.props.listPosts("")
-    this.setState({idUser:this.props.currectUserId})
+    this.props.switchProfile(this.props.currectUserId)
     this.setState(()=>({isInHomePage: true}))
 }
-setProfileClick(){
-    this.props.listPosts(this.state.key)
-    
+setProfile(id){
     this.setState(()=>({isInHomePage: false}))
 }
-setProfile(){
-    this.props.listPosts(this.state.key)
+setProfile2(){
+    this.props.switchProfilePost(this.props.currectUserId)
+    this.props.switchProfile(this.props.currectUserId)
     this.setState(()=>({isInHomePage: false}))
 }
 setKey(cle){
@@ -60,7 +61,7 @@ render(){
                                 <Search></Search>
                             </div>
                         <div className="col-1">
-                            <button onClick={this.setProfile} className="accueil">Profile</button>
+                            <button onClick={this.setProfile2} className="accueil">Profile</button>
                         </div>
                             <div className="col-1">
                                 <button onClick={this.setHomePage}  className="accueil">Accueil</button>
@@ -92,7 +93,7 @@ render(){
                                 <Search></Search>
                             </div>
                         <div className="col-1">
-                            <button onClick={this.setProfile} className="accueil">Profile</button>
+                            <button onClick={this.setProfile2} className="accueil">Profile</button>
                         </div>
                             <div className="col-1">
                                 <button onClick={this.setHomePage} className="accueil">Accueil</button>
@@ -104,7 +105,7 @@ render(){
                     </div>                       
                 </div>
             </nav>
-            <ProfilePage idUser={this.state.idUser}> 
+            <ProfilePage idUser={this.props.idUser}> 
                 
             </ProfilePage>
             </div>
@@ -127,11 +128,14 @@ render(){
 }
 const mapStateToProps = (state) => {
     return {
-        currectUserId: state.currentUser.idUser
+        currectUserId: state.currentUser.idUser,
+        idUser: state.currentProfile.idUser
     }
 }
 
 const mapDispatchToProps  = {
-    listPosts
+    listPosts, 
+    switchProfile,
+    switchProfilePost
 }
 export default connect(mapStateToProps,mapDispatchToProps)(MainPage)
