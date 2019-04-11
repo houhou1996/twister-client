@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style/signin.css';
-
+import axios from 'axios'
 
 class Signin extends React.Component {
     constructor() {
@@ -27,13 +27,27 @@ class Signin extends React.Component {
     submituserRegistrationForm(e) {
       e.preventDefault();
       if (this.validateForm()) {
-          let fields = {};
-          fields["username"] = "";
-          fields["emailid"] = "";
-          fields["mobileno"] = "";
-          fields["password"] = "";
-          this.setState({fields:fields});
-          alert("Form submitted");
+          axios.get("http://localhost:8080/twister/createUser?nom="+this.state.fields["username"]
+          +"&login="+this.state.fields["emailid"]+"&mobilePhone="+this.state.fields["mobileno"]
+          +"&password="+this.state.fields["password"]).then(response=>{
+            if(!response.data.message){
+              
+              alert("successful registration log in to continue");
+              let fields = {};
+              fields["username"] = "";
+              fields["emailid"] = "";
+              fields["mobileno"] = "";
+              fields["password"] = "";
+              this.setState({fields:fields});
+            }else{
+              alert(response.data.message);
+            }
+
+          })
+          
+          
+
+
       }
 
     }
@@ -102,6 +116,8 @@ class Signin extends React.Component {
 
     }
 
+    
+
 
 
   render() {
@@ -109,7 +125,7 @@ class Signin extends React.Component {
     <div id="main-registration-container">
      <div id="register">
         <h3>Registration page</h3>
-        <form method="post"  name="userRegistrationForm"  onSubmit= {this.submituserRegistrationForm} >
+        <form name="userRegistrationForm"  onSubmit= {this.submituserRegistrationForm} >
         <label>Name</label>
         <input type="text" name="username" value={this.state.fields.username} onChange={this.handleChange} />
         <div className="errorMsg">{this.state.errors.username}</div>

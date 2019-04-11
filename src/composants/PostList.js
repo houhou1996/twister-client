@@ -1,22 +1,27 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {normalize,schema} from 'normalizr'
+import Post from './Post';
 class PostList extends React.Component{
+
 
     render (){
         return(
             <div>
-                <ul className ="col-md-4">
-                    {
-                        this.props.posts.map((post)=>{
-                            <li className="list-group-item" key={post.id}>
+                {
+                    this.props.myPosts.map((post,index)=>{
+                        return(
+                            <p key = {post._id}>
                                 {
-                                    post.text
+                                   <Post setIdUser={this.props.setIdUser} 
+                                   setProfile={this.props.setProfile} 
+                                   indice = {index}cle={this.props.cle} 
+                                   post={post}></Post>
                                 }
-                            </li>
-                        })
-                    }
-
-                </ul>
+                            </p>
+                        )
+                    })
+                }
             </div>
         )
     }
@@ -25,7 +30,10 @@ class PostList extends React.Component{
 }
 function mapStateToProps(state) {
     return {
-         myPosts : state.posts
+        cle: state.currentUser.cle,
+         myPosts : state.Posts,
+         store: state
     }
 }
-export default connect(mapStateToProps)(PostList)
+
+export default connect(mapStateToProps,null)(PostList)

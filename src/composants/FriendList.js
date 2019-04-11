@@ -1,28 +1,49 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {afficheFriends} from '../reducers/AfficheFriends'
-import {bindActionCreators} from 'redux'
+import {afficheFriends} from '../actions/index'
 class FriendList extends React.Component{
 
+componentWillMount(){
+    
+    this.props.afficheFriends(this.props.cle)
+}
+ 
     render (){
+        if(this.props.friends!== undefined){
+        return(
+           <div>
+              {
+                  this.props.friends.map((friend,index)=>{
+                      return(
+                    <p key ={index}> 
+                      {
+                            friend.name
+                      }
+                      </p>
+                      );
+                  })
+              }
+           </div>
+        )
+    }else{
         return(
             <div>
-                {
-                    this.props.afficheFriends(this.props.cle).bind(this)
-                }
+
             </div>
         )
     }
-
-
 }
-function  mapStateToProps(state) {    
+
+    
+}
+
+const  mapStateToProps = (state) =>{    
     return {
-        
+        friends: state.friends.friends
     }
 }
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({afficheFriends:afficheFriends},dispatch)
+const mapDispatchToProps ={
+    afficheFriends
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(FriendList)

@@ -2,13 +2,19 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/Login.css'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {connection} from '../actions/index'
+import {afficheFriends} from '../actions/index'
+import {listPosts} from '../actions/index'
+import {getUsers} from '../actions/index'
 class Login extends React.Component{
 
     constructor(props){
         super(props)
-        this.state={login:"",password:"",key:"",status:"",texterror:""}
+        this.state={login:"",password:"",key:"",idUser:0,status:"",texterror:""}
         this.updateLoginValue = this.updateLoginValue.bind(this)
         this.updatePasswordValue = this.updatePasswordValue.bind(this)
+
 
     }
 
@@ -29,11 +35,18 @@ class Login extends React.Component{
     .then(response=>{
         if(!response.data.clé){
             this.setState({status: "error",texterror: response.data.message})
+            alert(response.data.message)
             
         }else{
             this.setState({key: response.data.clé})
+            this.setState({idUser: response.data.idUser})
             this.props.connexion()
             this.props.setKey(this.state.key)
+            this.props.setIdUser(this.state.idUser)
+            this.props.connection(this.state.key,this.state.idUser)
+            this.props.afficheFriends(this.state.key)
+            this.props.listPosts("")
+            this.props.getUsers()
 
         }
         
@@ -96,4 +109,18 @@ class Login extends React.Component{
         
     
 }
-export default Login
+
+
+ const mapStateToProps = (state) => {
+    return {
+        store: state
+    }
+}
+const mapDispatchToProps  = {
+    getUsers,
+    afficheFriends,
+    connection,
+    listPosts,
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login)
