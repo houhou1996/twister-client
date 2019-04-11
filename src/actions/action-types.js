@@ -1,0 +1,12 @@
+export const AT_POSTS={
+    ADD: "ADD_POST",
+    DELETE: "DELETE_POST",
+    LIST: "LIST_POST",
+    LISTALL: "LISTALL_POST"
+}
+export const AT_COMMENTS={
+    ADD: "ADD_COMMENT",
+    DELETE: "DELETE_COMMENT",
+    LIST: "LIST_COMMENT",
+    LISTALL: "LISTALL_COMMENT"
+}
