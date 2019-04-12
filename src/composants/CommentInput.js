@@ -14,13 +14,14 @@ class CommentInput extends React.Component{
     }
 handleClick =() =>{
 
-    this.props.addComment(this.props.cle,this.props.post._id,this.state.content,this.props.indice)
+    this.props.addComment(this.props.cle,this.props.post._id,this.state.content)
 
 }
     render(){
         return(
             <div>
-                
+                <input onChange={this.updateTextValue} className="form-control" placeholder="Add a comment" type="text" />
+                <button onClick={this.handleClick}>add comment</button>
             </div>
         )
     }

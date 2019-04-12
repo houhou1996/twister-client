@@ -8,6 +8,31 @@ export const SWITCH_PROFILE_POST = "SWITCH_PROFILE_POST"
 export const LIST_USERS = "LIST_USERS"
 
 
+
+export function addComment(cle,id,content){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/addComment?key="+cle+"&idPost="+id+"&text="+content
+        axios.get(url).then(response=>{
+                    console.log(response.data)
+                    dispatch({type : AT_COMMENTS.ADD, payload : response.data.comment})
+                        
+                })
+        
+    }     
+    
+}
+export function listComments(){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/listComments"
+        axios.get(url).then(response=>{
+
+                    dispatch({type : AT_COMMENTS.LIST, payload: response.data.comments})
+                        
+                })
+        
+    }     
+    
+}
 export function deleteFriend(cle,idUser,idFriend){
     return function(dispatch){
         var url = "http://localhost:8080/twister/removeFriend?key="+cle+"&idFriend="+idFriend
@@ -51,18 +76,6 @@ export function switchProfile(id){
       dispatch({type : SWITCH_PROFILE, payload : {"idUser": id}})
    
     }    
-    
-}
-export function addComment(cle,id,content,index){
-    return function(dispatch){
-        var url = "http://localhost:8080/twister/addComment?key="+cle+"&idPost="+id+"&text="+content
-        axios.get(url).then(response=>{
-            
-                    dispatch({type : AT_COMMENTS.ADD, indice: index, payload : response.data.comment})
-                        
-                })
-        
-    }     
     
 }
 export function getUsers(){

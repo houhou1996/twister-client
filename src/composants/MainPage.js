@@ -98,7 +98,7 @@ render(){
                     </div>                       
                 </div>
             </nav>
-            <ProfilePage idUser={this.props.idUser}> 
+            <ProfilePage setProfile={this.setProfile} idUser={this.props.idUser}> 
                 
             </ProfilePage>
             </div>

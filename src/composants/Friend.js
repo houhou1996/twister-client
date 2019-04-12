@@ -14,8 +14,7 @@ import {switchProfilePost} from '../actions/index'
     render(){
         return (
             <div>
-            <hr />
-            <div className="container bootstrap snippet">
+            <div className="container">
               <div className="row">
                 <div className="col">
                   <div className="main-box no-header clearfix">

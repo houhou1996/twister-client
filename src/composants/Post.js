@@ -84,7 +84,7 @@ render(){
  }else{
     return(
       <div className="container bootstrap snippet">
-        <div className="col-sm-8">
+        <div className="col-sm-10">
           <div className="panel panel-white post panel-shadow">
             <div className="post-heading">
               <div className="pull-left image">
@@ -121,7 +121,7 @@ render(){
             </div>
             <div className="post-footer">
               <div className="input-group"> 
-                <CommentInput indice={this.props.indice} post={this.props.post}>
+                <CommentInput post={this.props.post}>
 
                 </CommentInput>
 

@@ -1,24 +1,26 @@
 import React from 'react'
 import Comment from './Comment'
+import {connect} from 'react-redux'
 class CommentList extends React.Component{
-    constructor(props){
-        super(props)
-        this.state={display:false}
-    }
 
-    setDisplay(){
-        this.setState({display:true})
-    }
     
 
     render(){
         return(
             <div>
-                
+                {
+                    <Comment post = {this.props.post._id}/>
+                    
+                }
             </div>
         )
     }
 
 }
+const mapStateToProps = (state) => {
+    return {
+        posts: state.Posts
+    }
+}
 
-export default (CommentList)
+export default connect(mapStateToProps,null)(CommentList)

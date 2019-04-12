@@ -146,11 +146,9 @@ class ProfilePage extends React.Component{
                      </div>
                      </div>
                      <PostList 
-                     setIdUser={this.props.setIdUser} 
+
                      setProfile={this.props.setProfile} 
-                      cle ={this.props.cle}>
-                         
-                     </PostList>
+                      />
                  </div>
                      
                      

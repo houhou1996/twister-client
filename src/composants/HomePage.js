@@ -16,7 +16,7 @@ class HomePage extends React.Component{
                 
                     <div className="col-md-7">
                        
-                        <PostList setIdUser={this.props.setIdUser} setProfile={this.props.setProfile}  cle ={this.props.cle}></PostList>
+                        <PostList setProfile={this.props.setProfile}></PostList>
                         
                     </div>
                     <div className="col-md-5">

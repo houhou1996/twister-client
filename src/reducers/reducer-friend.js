@@ -1,6 +1,6 @@
 import {FRIEND_DISPLAYED} from '../actions/index'
 import {AT_FRIENDS} from '../actions/action-types'
-
+import {LOG_OUT} from '../actions/index'
 export default function (state = [],action){
     switch(action.type){
         case FRIEND_DISPLAYED:
@@ -16,7 +16,8 @@ export default function (state = [],action){
             ]
         case AT_FRIENDS.DELETE:
             return state.filter(friend=>friend.idUser!==action.idUser && friend.idFriend!==action.idFriend)
-      
+        case LOG_OUT:
+            return []
             
     
             
