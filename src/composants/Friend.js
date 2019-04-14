@@ -6,8 +6,7 @@ import {switchProfilePost} from '../actions/index'
  class Friend extends React.Component{
 
     handleClick(id){
-        console.log(id)
-        this.props.switchProfile(id)
+    this.props.switchProfile(id)
     this.props.switchProfilePost(id)
     this.props.setProfile(id)
     }

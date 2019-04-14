@@ -7,6 +7,9 @@ import {connect} from 'react-redux'
 import {deletePost} from '../actions/index'
 import {switchProfile} from '../actions/index'
 import {switchProfilePost} from '../actions/index'
+import {like} from '../actions/index'
+import '../style/comment.css'
+import Like from './Like'
 class Post extends React.Component{
 
 
@@ -18,51 +21,49 @@ handleClick(id){
     this.props.switchProfile(id)
     this.props.switchProfilePost(id)
     this.props.setProfile(id)
-
-
 }
 
+
 render(){
-    if(this.props.idUser === this.props.post.id_user){
-    return (
-      <div className="container bootstrap snippet">
-        <div className="col-sm-8">
-          <div className="panel panel-white post panel-shadow">
-            <div className="post-heading">
-              <div className="pull-left image">
-                <img src="https://bootdey.com/img/Content/user_1.jpg" className="img-circle avatar" alt="user profile" />
-              </div>
-              <div className="pull-left meta">
-                <div className="title h5">
-                  <a onClick={()=>this.handleClick(this.props.post.id_user)}>
-                    <b>
-                    {this.props.post.name}
-                    </b>
-                  </a>
-                </div>
-              </div>
-      
-            </div> 
+  if(this.props.idUser === this.props.post.id_user){
+    return (<div className="main-section">
+    <div className="content">
+      <div className="top-section">
+        <div className="user-img">
+          <img src="http://nicesnippets.com/demo/man.png" />
+        </div>
+        <div className="container">
+        <div className="row">
+        <div className="col-sm-6">
+        <div className="user-detail">
+          <a href="#" onClick={()=>this.handleClick(this.props.post.id_user)} >{this.props.post.name}</a>
+          <div>{this.props.post.date}</div>
+          </div>
+        </div>
+
+        <div className="col-sm-6">
+
+          <a onClick={this.supprimer.bind(this,this.props.post._id)} className="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Delete</a>
+        </div>
+        </div>
+
+
+        </div>
+        <div style={{clear: 'both'}} />			
+      </div>
+      <div className="comment-content">
+        <span>{this.props.post.text}</span>
+      </div>
+     
             
-            
-            <div className="post-description"> 
-           
-            <button type="Submit" onClick={this.supprimer.bind(this,this.props.post._id)}className="text-muted time">delete</button>
-              <h3>
-                {
-                  this.props.post.text
-                }
-              </h3>
-              <div className="stats">
-                <a href="#" className="btn btn-default stat-item">
-                  <i className="fa fa-thumbs-up icon" />2
-                </a>
-                <a href="#" className="btn btn-default stat-item">
-                  <i className="fa fa-share icon" />12
-                </a>
+      </div>
+      <div className="stats">
+              <p>
+                  <Like post={this.props.post}/>
+              </p>
+          
               </div>
-            </div>
-            <div className="post-footer">
+              <div className="post-footer">
               <div className="input-group"> 
                 <CommentInput indice={this.props.indice} post={this.props.post}>
 
@@ -70,86 +71,79 @@ render(){
 
               </div>
               <div>
-                <CommentList post ={this.props.post}>
+                <CommentList setProfile={this.props.setProfile} post ={this.props.post}>
 
                 </CommentList>
               </div>
-              
-            </div>
+      </div>
+      </div>
+  
+                      )
+  }else{
+    return (<div className="main-section">
+    <div className="content">
+      <div className="top-section">
+        <div className="user-img">
+          <img src="http://nicesnippets.com/demo/man.png" />
+        </div>
+        <div className="container">
+        <div className="row">
+        <div className="col-sm-6">
+        <div className="user-detail">
+          <a href="#" onClick={()=>this.handleClick(this.props.post.id_user)}>{this.props.post.name}</a>
+          <div>{this.props.post.date}</div>
           </div>
         </div>
-      </div>
 
-    )
- }else{
-    return(
-      <div className="container bootstrap snippet">
-        <div className="col-sm-10">
-          <div className="panel panel-white post panel-shadow">
-            <div className="post-heading">
-              <div className="pull-left image">
-                <img src="https://bootdey.com/img/Content/user_1.jpg" className="img-circle avatar" alt="user profile image" />
-              </div>
-  
-              <div className="pull-left meta">
-                <div className="title h5">
-                  <a onClick={()=>this.handleClick(this.props.post.id_user)}>
-                    <b>
-                    {this.props.post.name}
-                    </b>
-                  </a>
-                </div>
-              </div>
       
-            </div> 
-            
-            
-            <div className="post-description"> 
-              <h3>
-                {
-                  this.props.post.text
-                }
-              </h3>
-              <div className="stats">
-                <a href="#" className="btn btn-default stat-item">
-                  <i className="fa fa-thumbs-up icon" />2
-                </a>
-                <a href="#" className="btn btn-default stat-item">
-                  <i className="fa fa-share icon" />12
-                </a>
+        </div>
+
+
+        </div>
+        <div style={{clear: 'both'}} />			
+      </div>
+      <div className="comment-content">
+        <span>{this.props.post.text}</span>
+      </div>
+      </div>
+      <div className="stats">
+              <p>
+                  <Like post={this.props.post}/>
+              </p>
+          
               </div>
-            </div>
-            <div className="post-footer">
+              <div className="post-footer">
               <div className="input-group"> 
-                <CommentInput post={this.props.post}>
+                <CommentInput indice={this.props.indice} post={this.props.post}>
 
                 </CommentInput>
 
               </div>
               <div>
-                <CommentList post ={this.props.post}>
+                <CommentList setProfile={this.props.setProfile} post ={this.props.post}>
 
                 </CommentList>
               </div>
-              
-            </div>
-          </div>
-        </div>
+              </div>
       </div>
-                )
-              }
+
+    )
+  }
+                    }
 }
-}
+
 const mapStateToProps = (state) => {
   return {
     userKey: state.currentUser.cle,
-    idUser: state.currentUser.idUser
+    idUser: state.currentUser.idUser,
+    likes: state.likes
   }
 }
 const mapDispatchToProps = {
       deletePost,
       switchProfile,
-      switchProfilePost
+      switchProfilePost,
+      like
   
 }
 

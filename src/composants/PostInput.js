@@ -20,7 +20,7 @@ handleClick(cle,content){
     render(){
         return(
             <div>
-            <div className="col-xs-12 col-sm-7" id="new_status">
+            <div className="text" id="new_status">
 
               <div className="col-xs-12" id="post_content">
               

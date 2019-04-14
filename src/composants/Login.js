@@ -3,13 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/Login.css'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {connection,getUsers,afficheFriends,listPosts,listComments} from '../actions/index'
+import {connection,getUsers,afficheFriends,listPosts,listComments,listLikes} from '../actions/index'
 
 class Login extends React.Component{
 
     constructor(props){
         super(props)
-        this.state={login:"",password:"",key:"",idUser:0,status:"",texterror:""}
+        this.state={login:"",password:"",status:"",texterror:""}
         this.updateLoginValue = this.updateLoginValue.bind(this)
         this.updatePasswordValue = this.updatePasswordValue.bind(this)
 
@@ -36,14 +36,13 @@ class Login extends React.Component{
             alert(response.data.message)
             
         }else{
-            this.setState({key: response.data.clé})
-            this.setState({idUser: response.data.idUser})
             this.props.connexion()
             this.props.getUsers()
-            this.props.connection(this.state.key,this.state.idUser)
-            this.props.afficheFriends(this.state.key)
+            this.props.connection(response.data.clé,response.data.idUser,response.data.name)
+            this.props.afficheFriends(response.data.clé)
             this.props.listPosts("")
             this.props.listComments()
+            this.props.listLikes()
             
 
         }
@@ -119,7 +118,8 @@ const mapDispatchToProps  = {
     afficheFriends,
     connection,
     listPosts,
-    listComments
+    listComments,
+    listLikes
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Login)

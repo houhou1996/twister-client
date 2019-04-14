@@ -6,8 +6,57 @@ export const SWITCH_USER = "SWITCH_USER"
 export const SWITCH_PROFILE = "SWITCH_PROFILE"
 export const SWITCH_PROFILE_POST = "SWITCH_PROFILE_POST"
 export const LIST_USERS = "LIST_USERS"
+export const LIKE = "LIKE"
+export const LIST_LIKES = "LIST_LIKES"
+export const DISLIKE = "DISLIKE"
 
+export function deleteComment(idPost,idComment){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/removeComment?idPost="+idPost+"&idComment="+idComment
+        axios.get(url).then(response=>{
+                    dispatch({type : AT_COMMENTS.DELETE, payload : idComment})
+                        
+                })
+        
+    }     
+    
+}
+export function listLikes(){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/listLikes"
+        axios.get(url).then(response=>{
 
+                    dispatch({type : LIST_LIKES, payload: response.data.likes})
+                        
+                })
+        
+    }     
+    
+}
+export function dislike(cle,idPost,idUser){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/removeLike?key="+cle+"&idPost="+idPost
+        axios.get(url).then(response=>{
+
+                    dispatch({type : DISLIKE, id_post : idPost, id_user: idUser})
+                        
+                })
+        
+    }     
+    
+}
+export function like(cle,idPost){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/like?key="+cle+"&idPost="+idPost
+        axios.get(url).then(response=>{
+
+                    dispatch({type : LIKE, payload : response.data.like})
+                        
+                })
+        
+    }     
+    
+}
 
 export function addComment(cle,id,content){
     return function(dispatch){
@@ -95,9 +144,9 @@ export function disconnect(){
         dispatch({type : LOG_OUT})
     }
 }
-export function connection(cle,idUser){
+export function connection(cle,idUser,name){
     return function(dispatch){
-        dispatch({type: SWITCH_USER, payload: {cle,idUser}})
+        dispatch({type: SWITCH_USER, payload: {cle,idUser,name}})
     }
 }
 export function afficheFriends(cle){

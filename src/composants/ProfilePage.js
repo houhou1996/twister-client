@@ -15,11 +15,11 @@ class ProfilePage extends React.Component{
         this.props.addFriend(this.props.cle,this.props.currentProfile)
     }
     areFriends = (idUser,idFriend) =>{
-          let trouve = false;
+          let trouve = false
           this.props.friends.map(friend=>{
           
                 if(idUser === friend.idUser && idFriend === friend.idFriend){
-                  trouve = true;
+                  trouve = true
                 }
               
           })
@@ -31,7 +31,9 @@ class ProfilePage extends React.Component{
      
       if( this.props.currentProfile === this.props.currentUser){
               return(
-                   <div id="user-profile-2" className="user-profile">
+                <div id="user-profile-2" className="user-profile">
+                   
+                   
                           <div className="tabbable">
                             
                             <div className="tab-content no-border padding-24">
@@ -72,6 +74,7 @@ class ProfilePage extends React.Component{
       if( this.areFriends(this.props.currentUser,this.props.currentProfile)){
         return(
           <div id="user-profile-2" className="user-profile">
+        
                  <div className="tabbable">
                    
                    <div className="tab-content no-border padding-24">
@@ -117,6 +120,7 @@ class ProfilePage extends React.Component{
   
       return(
         <div id="user-profile-2" className="user-profile">
+        
                <div className="tabbable">
                  <div className="tab-content no-border padding-24">
                    <div id="home" className="tab-pane in active">

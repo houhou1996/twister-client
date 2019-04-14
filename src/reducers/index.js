@@ -5,6 +5,7 @@ import UserReducer from './reducer-currentUser'
 import Users from './reducer-users'
 import ProfileReducer from './reducer-profile'
 import comments from './reducer-comment'
+import likes from './reducer-like'
 
 const rootReducer = combineReducers({
   currentUser: UserReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   friends,
   Posts,
   comments,
+  likes,
   currentProfile: ProfileReducer
 });
 

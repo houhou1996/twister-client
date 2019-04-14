@@ -119,3 +119,7 @@ body {
     background-color: #4e69a2;
     padding: 0 2rem;
   }
+  .text {
+   margin-left: 25%;
+   margin-right: 25%;
+}

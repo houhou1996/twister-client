@@ -12,17 +12,24 @@ class CommentInput extends React.Component{
         this.setState({content: evt.target.value})
         
     }
+    pressEnter = (e)=>{
+        if(e.key==='Enter'){
+            this.handleClick()
+        }
+    }
 handleClick =() =>{
 
     this.props.addComment(this.props.cle,this.props.post._id,this.state.content)
+    this.setState({content: ""})
 
 }
     render(){
         return(
-            <div>
-                <input onChange={this.updateTextValue} className="form-control" placeholder="Add a comment" type="text" />
-                <button onClick={this.handleClick}>add comment</button>
-            </div>
+            
+            <div  class="input-group"> 
+            <input value={this.state.content} onChange={this.updateTextValue} onKeyPress={this.pressEnter} className="form-control" placeholder="Add a comment" type="text"/>
+            
+        </div>
         )
     }
 

@@ -5,20 +5,23 @@ import Search from './Search';
 import Signin from './Signin';
 import HomePage from './HomePage';
 import ProfilePage from './ProfilePage';
-import '../style/navigation.css'
+import '../style/main.css'
 import {connect} from 'react-redux'
 import {listPosts} from '../actions/index'
 import {switchProfile} from '../actions/index'
 import {switchProfilePost} from '../actions/index'
+import UserList from './UserList';
 class MainPage extends React.Component{
         constructor(props){
             super(props)
-            this.state = {isConnected : false, pageCourante: "login",isInHomePage :true}
+            this.state = {isConnected : false, pageCourante: "login",isInAddFriend: false,isInHomePage :true}
             this.getConnected = this.getConnected.bind(this)
             this.setLogout = this.setLogout.bind(this)
             this.setHomePage = this.setHomePage.bind(this)
             this.setProfile = this.setProfile.bind(this)
             this.setProfile2 = this.setProfile2.bind(this)
+            this.setAddFriend = this.setAddFriend.bind(this)
+
         }
     
 
@@ -32,72 +35,67 @@ setHomePage(){
     this.props.listPosts("")
     this.props.switchProfile(this.props.currectUserId)
     this.setState(()=>({isInHomePage: true}))
+    this.setState(()=>({isInAddFriend: false}))
 }
 setProfile(id){
     this.setState(()=>({isInHomePage: false}))
+    this.setState(()=>({isInAddFriend: false}))
 }
 setProfile2(){
     this.props.switchProfilePost(this.props.currectUserId)
     this.props.switchProfile(this.props.currectUserId)
     this.setState(()=>({isInHomePage: false}))
+    this.setState(()=>({isInAddFriend: false}))
 }
-
+setAddFriend(){
+    this.setState(()=>({isInAddFriend:true}))
+}
 render(){
     if(this.state.isConnected === true){
+        if(this.state.isInAddFriend=== true){
+            return(
+                <div>
+                        <div className="topnav">
+                                    <a onClick={this.setProfile2}  className="active" href="#profile">{this.props.name}</a>
+                                    <a onClick={this.setHomePage}  href="#home">Accueil</a>
+                                    <a onClick={this.setAddFriend}href="#AddFriend">Add Friend</a>
+                                    <Logout logout={this.setLogout}/>
+                                    <Search/>
+                        </div>
+               
+               <div className="home">
+                    <UserList setProfile={this.setProfile}/>
+                </div>
+            </div>
+            )
+        }else{
         if(this.state.isInHomePage===true){
             return(
                 <div>
-                <nav className="navigation">
-                <div className="container"> 
-                    <div className="row">
-                    <div className="col-8">
-                                <Search></Search>
-                            </div>
-                        <div className="col-1">
-                            <button onClick={this.setProfile2} className="accueil">Profile</button>
+                        <div className="topnav">
+                                    <a onClick={this.setProfile2}  className="active" href="#profile">{this.props.name}</a>
+                                    <a onClick={this.setHomePage}  href="#home">Accueil</a>
+                                    <a onClick={this.setAddFriend}href="#AddFriend">Add Friend</a>
+                                    <Logout logout={this.setLogout}/>
+                                    <Search/>
                         </div>
-                            <div className="col-1">
-                                <button onClick={this.setHomePage}  className="accueil">Accueil</button>
-                            </div>
-                        <div className="col-1">
-
-                            <Logout logout={this.setLogout}/>
-                        </div>
-                            
-                            
-                    
-                    </div>
-                
+               
+               <div className="home">
+                    <HomePage  setProfile={this.setProfile}></HomePage>
                 </div>
-                </nav>
-                <div>
-                <HomePage  setProfile={this.setProfile}></HomePage>
-
             </div>
-            </div>
+       
             )
     }else{
         return(
         <div>
-        <nav className="navigation">
-                <div className="container"> 
-                    <div className="row">
-                    <div className="col-8">
-                                <Search></Search>
-                            </div>
-                        <div className="col-1">
-                            <button onClick={this.setProfile2} className="accueil">Profile</button>
+            <div className="topnav">
+                                    <a onClick={this.setProfile2}  className="active" href="#profile">{this.props.name}</a>
+                                    <a onClick={this.setHomePage}  href="#home">Accueil</a>
+                                    <a onClick={this.setAddFriend} href="#addFriend">Add Friend</a>
+                                    <Logout logout={this.setLogout}/>
+                                    <Search/>
                         </div>
-                            <div className="col-1">
-                                <button onClick={this.setHomePage} className="accueil">Accueil</button>
-                            </div>
-                        <div className="col-1">
-
-                            <Logout logout ={this.setLogout}/>
-                        </div> 
-                    </div>                       
-                </div>
-            </nav>
             <ProfilePage setProfile={this.setProfile} idUser={this.props.idUser}> 
                 
             </ProfilePage>
@@ -105,7 +103,7 @@ render(){
         )
     }
     
- } else{
+ } }else{
         return(
             <nav>
                 <Login 
@@ -116,6 +114,7 @@ render(){
             </nav>
         )
     }
+
 }
 
 }
@@ -123,7 +122,8 @@ const mapStateToProps = (state) => {
     return {
         currectUserId: state.currentUser.idUser,
         idUser: state.currentProfile.idUser,
-        cle: state.currentUser.cle
+        cle: state.currentUser.cle,
+        name: state.currentUser.name
     }
 }
 

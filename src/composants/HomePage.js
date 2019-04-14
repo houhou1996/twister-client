@@ -10,16 +10,16 @@ class HomePage extends React.Component{
     
     render(){
             return(
-            <div className ="container">
+            <div>
             <PostInput cle={this.props.cle}></PostInput>
-                <div className="row">
+                <div >
                 
-                    <div className="col-md-7">
+                    <div>
                        
                         <PostList setProfile={this.props.setProfile}></PostList>
                         
                     </div>
-                    <div className="col-md-5">
+                    <div>
                         <FriendList setProfile ={this.props.setProfile}cle ={this.props.cle}></FriendList>
                     </div>
                 </div>

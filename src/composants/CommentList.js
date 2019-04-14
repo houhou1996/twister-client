@@ -9,7 +9,7 @@ class CommentList extends React.Component{
         return(
             <div>
                 {
-                    <Comment post = {this.props.post._id}/>
+                    <Comment setProfile={this.props.setProfile} post = {this.props.post._id}/>
                     
                 }
             </div>
