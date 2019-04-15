@@ -14,13 +14,10 @@ class HomePage extends React.Component{
             <PostInput cle={this.props.cle}></PostInput>
                 <div >
                 
-                    <div>
+                    <div >
                        
                         <PostList setProfile={this.props.setProfile}></PostList>
                         
-                    </div>
-                    <div>
-                        <FriendList setProfile ={this.props.setProfile}cle ={this.props.cle}></FriendList>
                     </div>
                 </div>
             </div>

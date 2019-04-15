@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {normalize,schema} from 'normalizr'
+
 import Post from './Post';
 class PostList extends React.Component{
 

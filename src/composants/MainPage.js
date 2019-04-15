@@ -9,7 +9,7 @@ import '../style/main.css'
 import {connect} from 'react-redux'
 import {listPosts} from '../actions/index'
 import {switchProfile} from '../actions/index'
-import {switchProfilePost} from '../actions/index'
+import {switchProfilePost,updateFriend} from '../actions/index'
 import UserList from './UserList';
 class MainPage extends React.Component{
         constructor(props){
@@ -33,7 +33,7 @@ setLogout(){
 }
 setHomePage(){
     this.props.listPosts("")
-    this.props.switchProfile(this.props.currectUserId)
+    this.props.switchProfile(this.props.currectUserId,this.props.name)
     this.setState(()=>({isInHomePage: true}))
     this.setState(()=>({isInAddFriend: false}))
 }
@@ -42,8 +42,9 @@ setProfile(id){
     this.setState(()=>({isInAddFriend: false}))
 }
 setProfile2(){
+    this.props.updateFriend(this.props.currectUserId)
     this.props.switchProfilePost(this.props.currectUserId)
-    this.props.switchProfile(this.props.currectUserId)
+    this.props.switchProfile(this.props.currectUserId,this.props.name)
     this.setState(()=>({isInHomePage: false}))
     this.setState(()=>({isInAddFriend: false}))
 }
@@ -121,6 +122,7 @@ render(){
 const mapStateToProps = (state) => {
     return {
         currectUserId: state.currentUser.idUser,
+        currentName: state.currentUser.name,
         idUser: state.currentProfile.idUser,
         cle: state.currentUser.cle,
         name: state.currentUser.name
@@ -130,6 +132,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps  = {
     listPosts, 
     switchProfile,
-    switchProfilePost
+    switchProfilePost,
+    updateFriend
 }
 export default connect(mapStateToProps,mapDispatchToProps)(MainPage)

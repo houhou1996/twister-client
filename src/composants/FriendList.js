@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {afficheFriends} from '../actions/index'
+import {listFriends} from '../actions/index'
 import '../style/friendList.css'
 import Friend from './Friend';
 class FriendList extends React.Component{
@@ -27,7 +27,7 @@ const  mapStateToProps = (state) =>{
     }
 }
 const mapDispatchToProps ={
-    afficheFriends
+    listFriends
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(FriendList)

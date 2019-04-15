@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addFriend,deleteFriend,switchProfile,switchProfilePost} from '../actions/index'
+import {addFriend,deleteFriend,switchProfile,switchProfilePost,updateFriend} from '../actions/index'
 class User extends React.Component{
 
     deleteClick(){
@@ -18,8 +18,9 @@ class User extends React.Component{
           })  
         return trouve
     }
-    switchProfile(id){
-        this.props.switchProfile(id)
+    switchProfile(id,name){
+      this.props.updateFriend(id)
+        this.props.switchProfile(id,name)
         this.props.switchProfilePost(id)
         this.props.setProfile(id)
     }
@@ -30,7 +31,7 @@ class User extends React.Component{
                 <table>
                 <td>
                 <span className="glyphicon glyphicon-file" />
-                <a onClick={()=>this.switchProfile(this.props.user.id)}  href="#" >{this.props.user.name}</a> 
+                <a onClick={()=>this.switchProfile(this.props.user.id,this.props.user.name)}  href="#" >{this.props.user.name}</a> 
             </td>
             </table>
                 )
@@ -41,7 +42,7 @@ class User extends React.Component{
         <table>
             <td>
             <span className="glyphicon glyphicon-file" />
-            <a onClick={()=>this.switchProfile(this.props.user.id)}  href="#" >{this.props.user.name}</a> 
+            <a onClick={()=>this.switchProfile(this.props.user.id,this.props.user.name)}  href="#" >{this.props.user.name}</a> 
           </td>
           <td className="text-right text-nowrap">
             <button onClick={this.handleClick.bind(this)} className="btn btn-xs btn-info">add</button>
@@ -54,7 +55,7 @@ class User extends React.Component{
             <table>
             <td>
             <span className="glyphicon glyphicon-file" />
-           <a onClick={()=>this.switchProfile(this.props.user.id)}  href="#" >{this.props.user.name}</a> 
+           <a onClick={()=>this.switchProfile(this.props.user.id,this.props.user.name)}  href="#" >{this.props.user.name}</a> 
           </td>
           <td className="text-right text-nowrap">
             <button onClick={this.deleteClick.bind(this)} className="btn btn-xs btn-info">remove</button>
@@ -71,13 +72,14 @@ const mapDispatchToProps = {
     addFriend,
     deleteFriend,
     switchProfilePost,
-    switchProfile
+    switchProfile,
+    updateFriend
   }
    const mapStateToProps = (state) => {
      return {
        cle: state.currentUser.cle,
        currentUser: state.currentUser.idUser,
-       friends: state.friends,
+       friends: state.currentFriends,
        currentProfile:state.currentProfile.idUser
      }
    }

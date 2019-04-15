@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/comment.css'
 import {connect} from 'react-redux'
-import {deleteComment,switchProfile,switchProfilePost} from '../actions/index'
+import {deleteComment,switchProfile,switchProfilePost,updateFriend} from '../actions/index'
 class Comment extends React.Component{
     constructor(props){
         super(props)
@@ -13,8 +13,9 @@ class Comment extends React.Component{
         this.props.deleteComment(idPost,idComment)
 
     }
-    handleClick(id){
-    this.props.switchProfile(id)
+    handleClick(id,nom){
+      this.props.updateFriend(id)
+    this.props.switchProfile(id,nom)
     this.props.switchProfilePost(id)
     this.props.setProfile(id)
 
@@ -37,7 +38,7 @@ class Comment extends React.Component{
                                         </div>
                                         <div className="col-md-10">
                                           <p>
-                                            <a onClick={()=>this.handleClick(comment.id_user)} className="float-left" href="#"><strong>{comment.name}</strong></a>
+                                            <a onClick={()=>this.handleClick(comment.id_user,comment.name)} className="float-left" href="#"><strong>{comment.name}</strong></a>
                                             <span className="float-right"><i className="text-warning fa fa-star" /></span>
                                             <span className="float-right"><i className="text-warning fa fa-star" /></span>
                                             <span className="float-right"><i className="text-warning fa fa-star" /></span>
@@ -93,7 +94,8 @@ class Comment extends React.Component{
 const mapDispatchToProps = {
     deleteComment,
     switchProfile,
-    switchProfilePost
+    switchProfilePost,
+    updateFriend
 }
 const mapStateToProps = (state) => {
     return {

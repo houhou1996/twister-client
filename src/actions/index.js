@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {AT_POSTS, AT_COMMENTS,AT_FRIENDS} from './action-types'
+
 export const FRIEND_DISPLAYED = "FRIEND_DISPLAYED"
 export const LOG_OUT = "LOG_OUT"
 export const SWITCH_USER = "SWITCH_USER"
@@ -9,7 +10,34 @@ export const LIST_USERS = "LIST_USERS"
 export const LIKE = "LIKE"
 export const LIST_LIKES = "LIST_LIKES"
 export const DISLIKE = "DISLIKE"
+export const UPDATE_FRIENDS ="UPDATE_FRIENDS"
+export const LIST_FRIENDS_CURRENT_USER="LIST_FRIENDS_CURRENT_USER"
 
+
+
+export function currentFriend(cle){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/ListFriends?key="+cle
+        axios.get(url)
+                .then(response=>{
+                        dispatch({type : LIST_FRIENDS_CURRENT_USER,  payload : response.data.friends})
+                })
+
+    
+}
+}
+
+export function updateFriend(id){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/ListFriends"
+        axios.get(url)
+                .then(response=>{
+                        dispatch({type : UPDATE_FRIENDS,idUser:id,  payload : response.data.friends})
+                })
+
+    
+}
+}
 export function deleteComment(idPost,idComment){
     return function(dispatch){
         var url = "http://localhost:8080/twister/removeComment?idPost="+idPost+"&idComment="+idComment
@@ -86,7 +114,7 @@ export function deleteFriend(cle,idUser,idFriend){
     return function(dispatch){
         var url = "http://localhost:8080/twister/removeFriend?key="+cle+"&idFriend="+idFriend
         axios.get(url).then(response=>{
-
+                    console.log(idUser)
                     dispatch({type : AT_FRIENDS.DELETE, idUser:idUser,idFriend : idFriend})
                         
                 })
@@ -109,6 +137,7 @@ export function addFriend(cle,id){
 }
 
 
+
 export function switchProfilePost(id){
     return function(dispatch){
         var url = "http://localhost:8080/twister/listPosts?maxvalue=100"
@@ -120,9 +149,9 @@ export function switchProfilePost(id){
 }   
     
 }
-export function switchProfile(id){
+export function switchProfile(idUser,name){
     return function(dispatch){
-      dispatch({type : SWITCH_PROFILE, payload : {"idUser": id}})
+      dispatch({type : SWITCH_PROFILE, payload : {idUser,name}})
    
     }    
     
@@ -149,7 +178,7 @@ export function connection(cle,idUser,name){
         dispatch({type: SWITCH_USER, payload: {cle,idUser,name}})
     }
 }
-export function afficheFriends(cle){
+export function listFriends(cle){
     return function(dispatch){
         var url = "http://localhost:8080/twister/ListFriends?key="+cle
         axios.get(url)

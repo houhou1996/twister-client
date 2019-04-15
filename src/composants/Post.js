@@ -6,7 +6,7 @@ import CommentInput from './CommentInput';
 import {connect} from 'react-redux'
 import {deletePost} from '../actions/index'
 import {switchProfile} from '../actions/index'
-import {switchProfilePost} from '../actions/index'
+import {switchProfilePost,updateFriend} from '../actions/index'
 import {like} from '../actions/index'
 import '../style/comment.css'
 import Like from './Like'
@@ -17,8 +17,9 @@ supprimer(id){
       this.props.deletePost(this.props.userKey,id)
       
 }
-handleClick(id){
-    this.props.switchProfile(id)
+handleClick(id,nom){
+  this.props.updateFriend(id)
+    this.props.switchProfile(id,nom)
     this.props.switchProfilePost(id)
     this.props.setProfile(id)
 }
@@ -36,7 +37,7 @@ render(){
         <div className="row">
         <div className="col-sm-6">
         <div className="user-detail">
-          <a href="#" onClick={()=>this.handleClick(this.props.post.id_user)} >{this.props.post.name}</a>
+          <a href="#" onClick={()=>this.handleClick(this.props.post.id_user,this.props.post.name)} >{this.props.post.name}</a>
           <div>{this.props.post.date}</div>
           </div>
         </div>
@@ -90,7 +91,7 @@ render(){
         <div className="row">
         <div className="col-sm-6">
         <div className="user-detail">
-          <a href="#" onClick={()=>this.handleClick(this.props.post.id_user)}>{this.props.post.name}</a>
+          <a href="#" onClick={()=>this.handleClick(this.props.post.id_user,this.props.post.name)}>{this.props.post.name}</a>
           <div>{this.props.post.date}</div>
           </div>
         </div>
@@ -143,7 +144,8 @@ const mapDispatchToProps = {
       deletePost,
       switchProfile,
       switchProfilePost,
-      like
+      like,
+      updateFriend
   
 }
 

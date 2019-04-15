@@ -1,5 +1,5 @@
-import {FRIEND_DISPLAYED} from '../actions/index'
-import {AT_FRIENDS} from '../actions/action-types'
+import {FRIEND_DISPLAYED,UPDATE_FRIENDS} from '../actions/index'
+
 import {LOG_OUT} from '../actions/index'
 export default function (state = [],action){
     switch(action.type){
@@ -9,13 +9,9 @@ export default function (state = [],action){
             }else{
                 return []
             }
-        case AT_FRIENDS.ADD:
-            if(!action.payload.code)
-            return [
-                ...state,action.payload
-            ]
-        case AT_FRIENDS.DELETE:
-            return state.filter(friend=>friend.idUser!==action.idUser && friend.idFriend!==action.idFriend)
+        
+        case UPDATE_FRIENDS:
+        return action.payload.filter(friend=>friend.idUser===action.idUser)
         case LOG_OUT:
             return []
             
