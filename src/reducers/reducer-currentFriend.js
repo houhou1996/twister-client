@@ -12,7 +12,7 @@ export default function (state = [],action){
             case AT_FRIENDS.ADD:
             if(!action.payload.code)
             return [
-                ...state,action.payload
+                action.payload,...state
             ]
         case AT_FRIENDS.DELETE:
             return state.filter(friend=>friend.idUser!==action.idUser || friend.idFriend!==action.idFriend)

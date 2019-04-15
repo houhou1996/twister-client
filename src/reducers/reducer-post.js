@@ -8,7 +8,7 @@ export default function (state = [],action){
         case AT_POSTS.ADD:
             if(action.payload){
             return [
-                ...state,action.payload
+                action.payload,...state
             ]
         }else{
             return state

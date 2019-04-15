@@ -8,7 +8,7 @@ export default function (state = [],action){
             return []
         case AT_COMMENTS.ADD:
             return [
-                ...state,action.payload
+                action.payload,...state
             ]
         case LOG_OUT:
             return []
