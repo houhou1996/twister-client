@@ -14,10 +14,7 @@ render(){
                     if(user.id === this.props.idUser){
                         return(
                             <div key ={user.id} className="col-xs-12 col-sm-9">
-                                    <h4 className="blue">
-                                      <span className="middle">{user.name}</span>
-                                      
-                                    </h4>
+                                    
                                     <div className="profile-user-info">
                                       <div className="profile-info-row">
                                         <div className="profile-info-name"> Username </div>
@@ -30,7 +27,7 @@ render(){
                                       <div className="profile-info-row">
                                         <div className="profile-info-name"> Mobile Phone </div>
                                         <div className="profile-info-value">
-                                          <i className="fa fa-map-marker light-orange bigger-110" />
+                                          <i  />
                                           <span>{
                                               user.mobilePhone
                                           }
@@ -53,7 +50,7 @@ render(){
                                       <div className="profile-info-row">
                                         <div className="profile-info-name"> Website </div>
                                         <div className="profile-info-value">
-                                          <a href="#" target="_blank">www.alexdoe.com</a>
+                                          <a href="#" target="_blank">www.twister.com</a>
                                         </div>
                                       </div>
                                       <div className="profile-info-row">
@@ -61,7 +58,7 @@ render(){
                                           <i className="middle ace-icon fa fa-facebook-square bigger-150 blue" />
                                         </div>
                                         <div className="profile-info-value">
-                                          <a href="www.facebook.com">Find me on Facebook</a>
+                                          <a href="facebook">Find me on Facebook</a>
                                         </div>
                                       </div>
                                       <div className="profile-info-row">
@@ -69,7 +66,7 @@ render(){
                                           <i className="middle ace-icon fa fa-twitter-square bigger-150 light-blue" />
                                         </div>
                                         <div className="profile-info-value">
-                                          <a href="www.facebook.com">Follow me on Twitter</a>
+                                          <a href="twitter">Follow me on Twitter</a>
                                         </div>
                                       </div>
                                     </div>

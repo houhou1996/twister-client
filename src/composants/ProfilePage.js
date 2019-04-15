@@ -10,7 +10,7 @@ import FriendList from './FriendList';
 class ProfilePage extends React.Component{
     constructor(props){
       super(props)
-      this.state={inFriendList: false}
+      this.state={inFriendList: false,inAboutPage: false}
     }
     deleteClick(){
       this.props.deleteFriend(this.props.cle,this.props.currentUser,this.props.currentProfile)
@@ -32,10 +32,16 @@ class ProfilePage extends React.Component{
         return trouve
     }
     showFriendList=()=>{
-      this.setState({inFriendList: true})
+      this.setState({inAboutPage: false})
+      this.setState({inFriendList:true})
+    }
+    showAboutPage=()=>{
+      this.setState({inAboutPage: true})
+      this.setState({inFriendList:false})
     }
     showPostList=()=>{
-      this.setState({inFriendList: false})
+      this.setState({inAboutPage:false})
+      this.setState({inFriendList:false})
     }
     friendClick=()=>{
         this.showFriendList()
@@ -72,7 +78,7 @@ class ProfilePage extends React.Component{
               {/* BEGIN profile-header-tab */}
               <ul className="profile-header-tab nav nav-tabs">
                 <li onClick={this.showPostList}className="nav-item"><a href="#profile-post" className="nav-link" data-toggle="tab">POSTS</a></li>
-                <li className="nav-item"><a href="#profile-about" className="nav-link" data-toggle="tab">ABOUT</a></li>
+                <li onClick={this.showAboutPage}className="nav-item"><a href="#profile-about" className="nav-link" data-toggle="tab">ABOUT</a></li>
                 <li onClick={this.friendClick} className="nav-item"><a href="#profile-friends"
                 >FRIENDS</a></li>
               </ul>
@@ -119,7 +125,7 @@ class ProfilePage extends React.Component{
                         {/* BEGIN profile-header-tab */}
                         <ul className="profile-header-tab nav nav-tabs">
                           <li onClick={this.showPostList} className="nav-item"><a href="#profile-post" className="nav-link" data-toggle="tab">POSTS</a></li>
-                          <li className="nav-item"><a href="#profile-about" className="nav-link" data-toggle="tab">ABOUT</a></li>
+                          <li onClick={this.showAboutPage} className="nav-item"><a href="#profile-about" className="nav-link" data-toggle="tab">ABOUT</a></li>
                           <li onClick={this.friendClick} className="nav-item"><a href="#profile-friends" data-toggle="tab">FRIENDS</a></li>
                         </ul>
                         {/* END profile-header-tab */}
@@ -161,7 +167,7 @@ class ProfilePage extends React.Component{
                         {/* BEGIN profile-header-tab */}
                         <ul className="profile-header-tab nav nav-tabs">
                           <li onClick={this.showPostList} className="nav-item"><a href="#profile-post" className="nav-link" data-toggle="tab">POSTS</a></li>
-                          <li className="nav-item"><a href="#profile-about" className="nav-link" data-toggle="tab">ABOUT</a></li>
+                          <li onClick={this.showAboutPage} className="nav-item"><a href="#profile-about" className="nav-link" data-toggle="tab">ABOUT</a></li>
                           <li onClick={this.friendClick} className="nav-item"><a href="#profile-friends"  data-toggle="tab">FRIENDS</a></li>
                         </ul>
                         {/* END profile-header-tab */}
@@ -174,6 +180,7 @@ class ProfilePage extends React.Component{
 
     render(){
     if(this.state.inFriendList === false){
+      if(this.state.inAboutPage === false){
       if( this.props.currentProfile === this.props.currentUser){
       return(
         <div>
@@ -206,6 +213,30 @@ class ProfilePage extends React.Component{
           }
       }
     }else{
+      if( this.props.currentProfile === this.props.currentUser){
+        return(
+          <div>
+            {
+              this.currentProfile()
+            }
+            <UserDetails idUser={this.props.currentProfile}/>
+          </div>
+        )
+        }else{
+          return(
+            <div>
+              {
+                this.notCurrentProfile()
+              }
+              <UserDetails idUser={this.props.currentProfile}/>
+            </div>
+          )
+
+        }
+      
+
+    }
+  }else{
       if( this.props.currentProfile === this.props.currentUser){
         return(
           <div>

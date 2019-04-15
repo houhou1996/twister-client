@@ -1,6 +1,6 @@
 import {AT_POSTS, AT_COMMENTS} from '../actions/action-types'
 import{SWITCH_PROFILE_POST} from '../actions/index'
-import {LOG_OUT} from '../actions/index'
+import {LOG_OUT,SEARCH_POSTS} from '../actions/index'
 export default function (state = [],action){
     switch(action.type){
         case SWITCH_PROFILE_POST:
@@ -22,6 +22,12 @@ export default function (state = [],action){
         
         case AT_POSTS.DELETE:
             return state.filter(post=>post._id !== action.payload)
+        case SEARCH_POSTS:
+        if(action.payload){
+            return action.payload
+        }else{
+            return []
+        }
         case LOG_OUT:
             return []
     }

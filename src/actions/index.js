@@ -12,8 +12,20 @@ export const LIST_LIKES = "LIST_LIKES"
 export const DISLIKE = "DISLIKE"
 export const UPDATE_FRIENDS ="UPDATE_FRIENDS"
 export const LIST_FRIENDS_CURRENT_USER="LIST_FRIENDS_CURRENT_USER"
+export const SEARCH_POSTS ="SEARCH_POSTS"
 
+export function searchPosts(text){
+    return function(dispatch){
+        var url = "http://localhost:8080/twister/Search?text="+text
+        axios.get(url)
+                .then(response=>{
+                    console.log(response.data.posts)
+                        dispatch({type : SEARCH_POSTS,  payload : response.data.posts})
+                })
 
+    
+}
+}
 
 export function currentFriend(cle){
     return function(dispatch){

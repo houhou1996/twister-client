@@ -61,7 +61,7 @@ render(){
                                     <a onClick={this.setHomePage}  href="#home">Accueil</a>
                                     <a onClick={this.setAddFriend}href="#AddFriend">Add Friend</a>
                                     <Logout logout={this.setLogout}/>
-                                    <Search/>
+                                   
                         </div>
                
                <div className="home">
@@ -95,7 +95,7 @@ render(){
                                     <a onClick={this.setHomePage}  href="#home">Accueil</a>
                                     <a onClick={this.setAddFriend} href="#addFriend">Add Friend</a>
                                     <Logout logout={this.setLogout}/>
-                                    <Search/>
+                                    
                         </div>
             <ProfilePage setProfile={this.setProfile} idUser={this.props.idUser}> 
                 
